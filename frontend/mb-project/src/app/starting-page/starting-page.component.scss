@@ -1,0 +1,33 @@
+@import '../../theme.scss';
+
+.starting-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+    height: 90%;
+}
+
+.starting-page-header {
+    font-size: 35px;
+    width: 500px;
+    padding-bottom: 35px;
+}
+
+.starting-page-description {
+    font-size: 20px;
+    width: 60%;
+    height: 60%;
+}
+
+.starting-page-button-container {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    .starting-page-button {
+        font-size: 15px;
+        padding: 5px 40px;
+    }
+}

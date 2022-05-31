@@ -1,0 +1,25 @@
+<div class="upload-page-container">
+    <div class="upload-page-header">
+        Upload your file
+    </div>
+    <div class="upload-page-description">
+       Accepted formats: CSV, XES
+    </div>
+
+    <ngx-dropzone [multiple]="false" class="file-upload-dropzone" (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop file here or click to select it from your device</ngx-dropzone-label>
+        <ngx-dropzone-preview *ngIf="file$ | async as file" [removable]="true" (removed)="onRemove()">
+            <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+    </ngx-dropzone>
+
+    <div class="upload-page-button-container">
+        <button (click)="previousStep()" class="upload-page-button" mat-raised-button color="accent">
+            BACK
+        </button>
+        <button (click)="nextStep()" [disabled]="!(file$ | async)" class="upload-page-button"  mat-raised-button color="primary">
+            NEXT
+        </button>
+    </div>
+
+</div>
