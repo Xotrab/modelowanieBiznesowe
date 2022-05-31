@@ -161,3 +161,6 @@ cython_debug/
 
 #Output BPMN png file
 model.png
+
+#Directory with uploaded traces
+traces/
