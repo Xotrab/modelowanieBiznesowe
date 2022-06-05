@@ -1,0 +1,56 @@
+@import '../../theme.scss';
+
+.preview-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+    height: 90%;
+
+    &__header {
+        font-size: 35px;
+        width: 400px;
+        padding-bottom: 35px;
+    }
+    
+    &__description {
+        font-size: 20px;
+        height: 7%;
+    }
+
+    &__scrollable-table {
+        height: 390px;
+        min-width: 18%;
+        overflow: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+
+        table {
+            width: 100%;
+        }
+    }
+
+    &__input {
+        width: 20%;
+        margin-top: 30px;
+    }
+
+    &__button-container {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 30px;
+    }
+
+    .button {
+        font-size: 15px;
+        padding: 5px 40px;
+    }
+}
+
+.element-hidden {
+    visibility: hidden;
+}

@@ -1,1 +1,39 @@
-<p>csv-preview works!</p>
+<div class="preview-page-container">
+    <div class="preview-page-container__header">
+        Preview your CSV file
+    </div>
+    <div class="preview-page-container__description">
+       Click the checkbox below the table to redefine the column names
+    </div>
+    <mat-checkbox color="primary" [(ngModel)]="isFirstRowHeader" (ngModelChange)="parseCSV()">
+        First row includes column names
+    </mat-checkbox>
+    <div class="preview-page-container__scrollable-table mat-elevation-z8">
+        <table mat-table [dataSource]="parsedCSV" class="mat-elevation-z8">
+            <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index" matColumnDef="{{disCol}}">
+                <th mat-header-cell *matHeaderCellDef>{{disCol}}</th>
+                <td mat-cell *matCellDef="let element"> {{element[disCol]}}</td>
+            </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-checkbox color="primary" [(ngModel)]="isEditingColnames">
+            I want to manually change the column names
+    </mat-checkbox>
+    <mat-form-field class="preview-page-container__input" [ngClass]="{'element-hidden': !isEditingColnames}">
+        <mat-label>column names separated with a comma</mat-label>
+        <input matInput [(ngModel)]="joinedColnames">
+    </mat-form-field>
+    <button (click)="updateColnames()" class="button" mat-raised-button color="primary" [ngClass]="{'element-hidden': !isEditingColnames}">
+        UPDATE
+    </button>
+    <div class="preview-page-container__button-container">
+        <button (click)="previousStep()" class="button" mat-raised-button color="accent">
+            BACK
+        </button>
+        <button (click)="nextStep()" class="button"  mat-raised-button color="primary">
+            NEXT
+        </button>
+    </div>
+</div>
