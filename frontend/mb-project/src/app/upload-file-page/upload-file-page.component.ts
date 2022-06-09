@@ -23,7 +23,9 @@ export class UploadFilePageComponent implements OnInit {
         const addedFile: File = event.addedFiles[0];
         const split = addedFile.name.split('.');
         if(split.length < 2 || !(split[1].toLowerCase() == 'csv') && !(split[1].toLowerCase() == 'xes')) {
-            this.snackbar.open('Invalid file type');
+            this.snackbar.open('Invalid file type', 'Ok',{
+                duration: 3000
+            });
             return;
         }
 

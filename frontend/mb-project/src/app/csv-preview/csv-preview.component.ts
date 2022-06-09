@@ -48,7 +48,7 @@ export class CsvPreviewComponent implements OnInit {
     const requiredColnames = ['Case ID', 'Activity', 'Start Timestamp'];
 
     if (newColnames.length !== this.displayedColumns.length) {
-      this.snackbar.open(`Please specify ${this.displayedColumns.length} comma separated columns!`, 'Ok',{
+      this.snackbar.open(`Please specify ${this.displayedColumns.length} comma separated columns`, 'Ok',{
         duration: 3000
       });
 
@@ -56,7 +56,7 @@ export class CsvPreviewComponent implements OnInit {
     }
 
     if (!requiredColnames.every(required => newColnames.includes(required))) {
-      this.snackbar.open('Case ID, Activity and Start Timestamp columns are required to proceed!', 'Ok',{
+      this.snackbar.open('Case ID, Activity and Start Timestamp columns are required to proceed', 'Ok',{
         duration: 3000
       });
 
@@ -64,7 +64,7 @@ export class CsvPreviewComponent implements OnInit {
     }
 
     if (newColnames.includes('')) {
-      this.snackbar.open('Column name can not be an empty value!', 'Ok',{
+      this.snackbar.open('Column name can not be an empty value', 'Ok',{
         duration: 3000
       });
 
@@ -115,7 +115,7 @@ export class CsvPreviewComponent implements OnInit {
     const requiredColnames = ['Case ID', 'Activity', 'Start Timestamp'];
 
     if (!requiredColnames.every(required => this.displayedColumns.includes(required))) {
-      this.snackbar.open('Please define Case ID, Activity and Start Timestamp columns to proceed!', 'Ok',{
+      this.snackbar.open('Please define Case ID, Activity and Start Timestamp columns to proceed', 'Ok',{
         duration: 3000
       });
 

@@ -36,7 +36,7 @@ export class BpmnViewerComponent implements OnInit {
 
   public getBPMN(): void {
     if (!this.validateThresholdInput(this.eventThreshold)) {
-      this.snackbar.open("The event threshold is not a non-negative integer value!", 'Ok',{
+      this.snackbar.open("The event threshold is not a non-negative integer value", 'Ok',{
         duration: 3000
       });
 
