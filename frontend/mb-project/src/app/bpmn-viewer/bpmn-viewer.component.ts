@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BpmnService } from '../bpmn.service';
 import { FileHandlerService } from '../file-handler.service';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bpmn-viewer',
   templateUrl: './bpmn-viewer.component.html',
   styleUrls: ['./bpmn-viewer.component.scss']
 })
-export class BpmnViewerComponent implements OnInit {
+export class BpmnViewerComponent implements OnInit, OnDestroy {
   public imageUrl: SafeResourceUrl;
 
   public eventThreshold: string = '0';
@@ -18,6 +20,8 @@ export class BpmnViewerComponent implements OnInit {
   private traces: File;
 
   private downloadUrl: string;
+
+  private bpmnSubscription: Subscription;
 
   constructor(
     private fileHandler: FileHandlerService,
@@ -28,10 +32,16 @@ export class BpmnViewerComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.fileHandler.file$.subscribe(file => {
-      this.traces = file;
-      this.getBPMN();
+    this.bpmnSubscription = this.fileHandler.file$.pipe(
+        filter(x => !!x)
+      ).subscribe(file => {
+        this.traces = file;
+        this.getBPMN();
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.bpmnSubscription.unsubscribe();
   }
 
   public getBPMN(): void {

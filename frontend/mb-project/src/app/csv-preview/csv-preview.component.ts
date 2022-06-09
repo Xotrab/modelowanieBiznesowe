@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { Subscription } from 'rxjs';
 import { FileHandlerService } from '../file-handler.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-csv-preview',
@@ -32,7 +33,9 @@ export class CsvPreviewComponent implements OnInit, OnDestroy {
   }
 
   public parseCSV(): void {
-    this.fileHandlerSubscription = this.fileHandler.file$.subscribe(file => {
+    this.fileHandlerSubscription = this.fileHandler.file$.pipe(
+      filter(x => !!x)
+    ).subscribe(file => {
       this.ngxCsvParser.parse(file, { header: this.isFirstRowHeader, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
           this.parsedCSV = result;
