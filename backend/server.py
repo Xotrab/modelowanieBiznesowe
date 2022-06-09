@@ -1,8 +1,11 @@
 import os
 from flask import Flask, request, send_file
 import model
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+
+cors = CORS(app, resources=r'/*', headers='Content-Type')
 
 app.config["TRACES_DIRECTORY"] = "./traces"
 app.config["THRESHOLD_HEADER"] = "Threshold"
