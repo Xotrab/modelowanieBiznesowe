@@ -1,1 +1,18 @@
-<p>bpmn-viewer works!</p>
+<div class="viewer-container">
+    <div class="viewer-container__header">
+        View the generated BPMN model
+    </div>
+    <div class="viewer-container__description">
+       Input the value below in order to filter the model
+    </div>
+    <div class="viewer-container__filtering-wrapper">
+        <mat-form-field class="input">
+            <mat-label>Event threshold</mat-label>
+            <input matInput [(ngModel)]="eventThreshold">
+        </mat-form-field>
+        <button (click)="getBPMN()" class="button"  mat-raised-button color="primary">
+            FILTER
+        </button>
+    </div>
+    <img [src]='imageUrl'/>
+</div>

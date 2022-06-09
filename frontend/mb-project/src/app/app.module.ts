@@ -16,6 +16,7 @@ import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent, StartingPageComponent, UploadFilePageComponent, NavbarComponent, CsvPreviewComponent, BpmnViewerComponent],
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
         MatTableModule,
         MatCheckboxModule,
         FormsModule,
-        MatInputModule
+        MatInputModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent],

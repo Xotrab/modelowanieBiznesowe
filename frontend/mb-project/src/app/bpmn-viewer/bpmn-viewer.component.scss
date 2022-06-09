@@ -1,0 +1,35 @@
+.viewer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+    height: 90%;
+
+    &__header {
+        font-size: 35px;
+        width: 600px;
+        padding-bottom: 35px;
+    }
+    
+    &__description {
+        font-size: 20px;
+        height: 7%;
+    }
+
+    &__filtering-wrapper {
+        display: flex;
+        gap: 50px;
+        margin-bottom: 30px;
+
+        ::ng-deep .mat-form-field-wrapper{
+            margin-bottom: -1.25em;
+         }
+    
+        .button {
+            font-size: 15px;
+            padding: 5px 40px;
+        }
+    }
+
+}
