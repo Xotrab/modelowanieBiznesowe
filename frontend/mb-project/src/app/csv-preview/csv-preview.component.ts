@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgxCsvParser } from 'ngx-csv-parser';
+import { Subscription } from 'rxjs';
 import { FileHandlerService } from '../file-handler.service';
 
 @Component({
@@ -9,13 +10,15 @@ import { FileHandlerService } from '../file-handler.service';
   templateUrl: './csv-preview.component.html',
   styleUrls: ['./csv-preview.component.scss']
 })
-export class CsvPreviewComponent implements OnInit {
+export class CsvPreviewComponent implements OnInit, OnDestroy {
   public parsedCSV: Array<any>;
   public isFirstRowHeader: boolean = true;
   public displayedColumns: Array<string>;
   public joinedColnames: string;
 
   public isEditingColnames: boolean = false;
+
+  private fileHandlerSubscription: Subscription;
 
   constructor(
     private fileHandler: FileHandlerService,
@@ -29,7 +32,7 @@ export class CsvPreviewComponent implements OnInit {
   }
 
   public parseCSV(): void {
-    this.fileHandler.file$.subscribe(file => {
+    this.fileHandlerSubscription = this.fileHandler.file$.subscribe(file => {
       this.ngxCsvParser.parse(file, { header: this.isFirstRowHeader, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
           this.parsedCSV = result;
@@ -38,9 +41,15 @@ export class CsvPreviewComponent implements OnInit {
             Array.from({length: this.parsedCSV[0].length}, (_, key) => `${key}`);
             this.joinedColnames = this.displayedColumns.join(',');
         }, _ => {
-          console.log("Error occured while parsing the csv file");
+          this.snackbar.open("Error occured while parsing the csv file", 'Ok',{
+            duration: 3000
+          });
         });
     });
+  }
+  
+  public ngOnDestroy(): void {
+    this.fileHandlerSubscription.unsubscribe();
   }
 
   public updateColnames(): void {
