@@ -17,7 +17,12 @@ export class CsvPreviewComponent implements OnInit {
 
   public isEditingColnames: boolean = false;
 
-  constructor(private fileHandler: FileHandlerService, private ngxCsvParser: NgxCsvParser, private snackbar: MatSnackBar, private router: Router) { }
+  constructor(
+    private fileHandler: FileHandlerService,
+    private ngxCsvParser: NgxCsvParser,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) { }
 
   public ngOnInit(): void {
     this.parseCSV();
@@ -117,7 +122,7 @@ export class CsvPreviewComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['bpmnViewer']);
+    this.router.navigate(['/bpmnViewer']);
   }
 
   public previousStep() {
