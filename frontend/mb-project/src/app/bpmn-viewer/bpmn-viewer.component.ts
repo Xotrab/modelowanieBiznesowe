@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { BpmnService } from '../bpmn.service';
 import { FileHandlerService } from '../file-handler.service';
 
@@ -16,11 +17,14 @@ export class BpmnViewerComponent implements OnInit {
 
   private traces: File;
 
+  private downloadUrl: string;
+
   constructor(
     private fileHandler: FileHandlerService,
     private bpmnService: BpmnService,
     private sanitizer: DomSanitizer,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -41,9 +45,20 @@ export class BpmnViewerComponent implements OnInit {
 
     this.bpmnService.getBPMN(this.traces, this.eventThreshold).subscribe(result => {
       var blobObj = new Blob([result.body], { type: "image/png" });
-      let objectURL = URL.createObjectURL(blobObj);
-      this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+      this.downloadUrl = URL.createObjectURL(blobObj);
+      this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.downloadUrl);
     });
+  }
+
+  public navigateHome(): void {
+    this.router.navigate(['/']);
+  }
+
+  public downloadModel(): void {
+    var a = document.createElement("a");
+    a.href = this.downloadUrl;
+    a.download = "model";
+    a.click();
   }
 
   private validateThresholdInput(threshold: string): boolean {

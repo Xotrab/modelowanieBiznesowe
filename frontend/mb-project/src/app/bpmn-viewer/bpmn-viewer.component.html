@@ -14,5 +14,16 @@
             FILTER
         </button>
     </div>
-    <img [src]='imageUrl'/>
+    <div class="viewer-container__button-container">
+        <button (click)="navigateHome()" class="button" mat-raised-button color="accent">
+            HOME
+        </button>
+        <button (click)="downloadModel()" class="button"  mat-raised-button color="primary">
+            DOWNLOAD
+        </button>
+    </div>
+    <img class="viewer-container__image" [src]='imageUrl'/>
+    <div class="viewer-container__footer-margin">
+        
+    </div>
 </div>

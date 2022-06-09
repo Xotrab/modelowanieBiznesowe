@@ -14,7 +14,7 @@
     
     &__description {
         font-size: 20px;
-        height: 7%;
+        min-height: 7%;
     }
 
     &__filtering-wrapper {
@@ -32,4 +32,25 @@
         }
     }
 
+    &__button-container {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        gap: 55px;
+        margin-bottom: 30px;
+
+        .button {
+            font-size: 15px;
+            padding: 5px 40px;
+        }
+    }
+
+    &__image {
+        border-radius: 6px;
+    }
+
+    &__footer-margin {
+        min-height: 30px;
+        width: 100%;
+    }
 }
