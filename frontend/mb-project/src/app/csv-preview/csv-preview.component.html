@@ -3,7 +3,12 @@
         Preview your CSV file
     </div>
     <div class="preview-page-container__description">
-       Click the checkbox below the table to redefine the column names
+        <span>
+            Click the checkbox below the table to redefine the column names
+        </span>
+        <span>
+            Required columns: Case ID, Activity, Start Timestamp
+        </span>
     </div>
     <mat-checkbox color="primary" [(ngModel)]="isFirstRowHeader" (ngModelChange)="parseCSV()">
         First row includes column names

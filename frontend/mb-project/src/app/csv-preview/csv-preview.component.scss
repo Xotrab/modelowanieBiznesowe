@@ -15,8 +15,13 @@
     }
     
     &__description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
         font-size: 20px;
         height: 7%;
+        margin-bottom: 30px;
     }
 
     &__scrollable-table {
